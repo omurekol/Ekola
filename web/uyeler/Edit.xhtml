@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="UyelerEditDlg" widgetVar="UyelerEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{bundleMyBundle.EditUyelerTitle}" closeOnEscape="true">
+
+            <h:form id="UyelerEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" columnClasses="column" rendered="#{uyelerController.selected != null}">
+
+
+                        <h:outputLabel value="#{bundleMyBundle.EditUyelerLabel_uyeId}" for="uyeId" />
+                        <h:outputText id="uyeId" value="#{uyelerController.selected.uyeId}" />
+
+                        <p:outputLabel value="#{bundleMyBundle.EditUyelerLabel_uyeKadi}" for="uyeKadi" />
+                        <p:inputText id="uyeKadi" value="#{uyelerController.selected.uyeKadi}" title="#{bundleMyBundle.EditUyelerTitle_uyeKadi}" required="true" requiredMessage="#{bundleMyBundle.EditUyelerRequiredMessage_uyeKadi}" size="200" maxlength="200"/>
+
+                        <p:outputLabel value="#{bundleMyBundle.EditUyelerLabel_uyeSifre}" for="uyeSifre" />
+                        <p:inputText id="uyeSifre" value="#{uyelerController.selected.uyeSifre}" title="#{bundleMyBundle.EditUyelerTitle_uyeSifre}" required="true" requiredMessage="#{bundleMyBundle.EditUyelerRequiredMessage_uyeSifre}" size="200" maxlength="200"/>
+
+                        <p:outputLabel value="#{bundleMyBundle.EditUyelerLabel_uyeEposta}" for="uyeEposta" />
+                        <p:inputText id="uyeEposta" value="#{uyelerController.selected.uyeEposta}" title="#{bundleMyBundle.EditUyelerTitle_uyeEposta}" required="true" requiredMessage="#{bundleMyBundle.EditUyelerRequiredMessage_uyeEposta}" size="200" maxlength="200"/>
+
+                        <p:outputLabel value="#{bundleMyBundle.EditUyelerLabel_uyeTarih}" for="uyeTarih" />
+                        <p:calendar id="uyeTarih" pattern="MM/dd/yyyy HH:mm:ss" value="#{uyelerController.selected.uyeTarih}" title="#{bundleMyBundle.EditUyelerTitle_uyeTarih}" required="true" requiredMessage="#{bundleMyBundle.EditUyelerRequiredMessage_uyeTarih}" showOn="button"/>
+
+                        <p:outputLabel value="#{bundleMyBundle.EditUyelerLabel_uyeRutbe}" for="uyeRutbe" />
+                        <p:inputText id="uyeRutbe" value="#{uyelerController.selected.uyeRutbe}" title="#{bundleMyBundle.EditUyelerTitle_uyeRutbe}" required="true" requiredMessage="#{bundleMyBundle.EditUyelerRequiredMessage_uyeRutbe}"/>
+
+                        <p:outputLabel value="#{bundleMyBundle.EditUyelerLabel_uyeOnay}" for="uyeOnay" />
+                        <p:inputText id="uyeOnay" value="#{uyelerController.selected.uyeOnay}" title="#{bundleMyBundle.EditUyelerTitle_uyeOnay}" required="true" requiredMessage="#{bundleMyBundle.EditUyelerRequiredMessage_uyeOnay}"/>
+
+                        <p:outputLabel value="#{bundleMyBundle.EditUyelerLabel_uyeAvatar}" for="uyeAvatar" />
+                        <p:inputText id="uyeAvatar" value="#{uyelerController.selected.uyeAvatar}" title="#{bundleMyBundle.EditUyelerTitle_uyeAvatar}" required="true" requiredMessage="#{bundleMyBundle.EditUyelerRequiredMessage_uyeAvatar}" size="150" maxlength="150"/>
+
+                        <p:outputLabel value="#{bundleMyBundle.EditUyelerLabel_uyeYorum}" for="uyeYorum" />
+                        <p:selectBooleanCheckbox id="uyeYorum" value="#{uyelerController.selected.uyeYorum}" required="true" requiredMessage="#{bundleMyBundle.EditUyelerRequiredMessage_uyeYorum}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{uyelerController.save}" value="#{bundleMyBundle.Save}" update="display,:UyelerListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('UyelerEditDialog'));">
+                        <p:confirm header="#{bundleMyBundle.ConfirmationHeader}" message="#{bundleMyBundle.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{bundleMyBundle.Cancel}" onclick="PF('UyelerEditDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

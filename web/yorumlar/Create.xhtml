@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="YorumlarCreateDlg" widgetVar="YorumlarCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleMyBundle.CreateYorumlarTitle}" closeOnEscape="true">
+
+            <h:form id="YorumlarCreateForm">
+
+                <h:panelGroup id="display" rendered="#{yorumlarController.selected != null}">
+                    <p:panelGrid columns="2" columnClasses="column">
+
+                        <p:outputLabel value="#{bundleMyBundle.CreateYorumlarLabel_uyeId}" for="uyeId" />
+                        <p:inputText id="uyeId" value="#{yorumlarController.selected.uyeId}" title="#{bundleMyBundle.CreateYorumlarTitle_uyeId}" required="true" requiredMessage="#{bundleMyBundle.CreateYorumlarRequiredMessage_uyeId}"/>
+
+                        <p:outputLabel value="#{bundleMyBundle.CreateYorumlarLabel_konuId}" for="konuId" />
+                        <p:inputText id="konuId" value="#{yorumlarController.selected.konuId}" title="#{bundleMyBundle.CreateYorumlarTitle_konuId}" required="true" requiredMessage="#{bundleMyBundle.CreateYorumlarRequiredMessage_konuId}"/>
+
+                        <p:outputLabel value="#{bundleMyBundle.CreateYorumlarLabel_begenenId}" for="begenenId" />
+                        <p:inputText id="begenenId" value="#{yorumlarController.selected.begenenId}" title="#{bundleMyBundle.CreateYorumlarTitle_begenenId}" required="true" requiredMessage="#{bundleMyBundle.CreateYorumlarRequiredMessage_begenenId}"/>
+
+                        <p:outputLabel value="#{bundleMyBundle.CreateYorumlarLabel_yorumBaslik}" for="yorumBaslik" />
+                        <p:inputText id="yorumBaslik" value="#{yorumlarController.selected.yorumBaslik}" title="#{bundleMyBundle.CreateYorumlarTitle_yorumBaslik}" required="true" requiredMessage="#{bundleMyBundle.CreateYorumlarRequiredMessage_yorumBaslik}" size="50" maxlength="50"/>
+
+                        <p:outputLabel value="#{bundleMyBundle.CreateYorumlarLabel_yorumIcerik}" for="yorumIcerik" />
+                        <p:inputTextarea rows="4" cols="30" id="yorumIcerik" value="#{yorumlarController.selected.yorumIcerik}" title="#{bundleMyBundle.CreateYorumlarTitle_yorumIcerik}" required="true" requiredMessage="#{bundleMyBundle.CreateYorumlarRequiredMessage_yorumIcerik}"/>
+
+                        <p:outputLabel value="#{bundleMyBundle.CreateYorumlarLabel_yorumTarihi}" for="yorumTarihi" />
+                        <p:calendar id="yorumTarihi" pattern="MM/dd/yyyy HH:mm:ss" value="#{yorumlarController.selected.yorumTarihi}" title="#{bundleMyBundle.CreateYorumlarTitle_yorumTarihi}" required="true" requiredMessage="#{bundleMyBundle.CreateYorumlarRequiredMessage_yorumTarihi}" showOn="button"/>
+
+                        <p:outputLabel value="#{bundleMyBundle.CreateYorumlarLabel_yorumsuzlukAvatarı}" for="yorumsuzlukAvatarı" />
+                        <p:inputText id="yorumsuzlukAvatarı" value="#{yorumlarController.selected.yorumsuzlukAvatarı}" title="#{bundleMyBundle.CreateYorumlarTitle_yorumsuzlukAvatarı}" required="true" requiredMessage="#{bundleMyBundle.CreateYorumlarRequiredMessage_yorumsuzlukAvatarı}" size="50" maxlength="50"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{yorumlarController.saveNew}" value="#{bundleMyBundle.Save}" update="display,:YorumlarListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('YorumlarCreateDialog'));">
+                        <p:confirm header="#{bundleMyBundle.ConfirmationHeader}" message="#{bundleMyBundle.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="#{bundleMyBundle.Cancel}" onclick="PF('YorumlarCreateDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

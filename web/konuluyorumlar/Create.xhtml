@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="KonuluyorumlarCreateDlg" widgetVar="KonuluyorumlarCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleMyBundle.CreateKonuluyorumlarTitle}" closeOnEscape="true">
+
+            <h:form id="KonuluyorumlarCreateForm">
+
+                <h:panelGroup id="display" rendered="#{konuluyorumlarController.selected != null}">
+                    <p:panelGrid columns="2" columnClasses="column">
+
+                        <p:outputLabel value="#{bundleMyBundle.CreateKonuluyorumlarLabel_konuluyorumlarPK_konularId}" for="konuluyorumlarPK_konularId" />
+                        <p:inputText id="konuluyorumlarPK_konularId" value="#{konuluyorumlarController.selected.konuluyorumlarPK.konularId}" title="#{bundleMyBundle.CreateKonuluyorumlarTitle_konuluyorumlarPK_konularId}" required="true" requiredMessage="#{bundleMyBundle.CreateKonuluyorumlarRequiredMessage_konuluyorumlarPK_konularId}"/>
+
+                        <p:outputLabel value="#{bundleMyBundle.CreateKonuluyorumlarLabel_konuluyorumlarPK_yorumlarId}" for="konuluyorumlarPK_yorumlarId" />
+                        <p:inputText id="konuluyorumlarPK_yorumlarId" value="#{konuluyorumlarController.selected.konuluyorumlarPK.yorumlarId}" title="#{bundleMyBundle.CreateKonuluyorumlarTitle_konuluyorumlarPK_yorumlarId}" required="true" requiredMessage="#{bundleMyBundle.CreateKonuluyorumlarRequiredMessage_konuluyorumlarPK_yorumlarId}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{konuluyorumlarController.saveNew}" value="#{bundleMyBundle.Save}" update="display,:KonuluyorumlarListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('KonuluyorumlarCreateDialog'));">
+                        <p:confirm header="#{bundleMyBundle.ConfirmationHeader}" message="#{bundleMyBundle.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="#{bundleMyBundle.Cancel}" onclick="PF('KonuluyorumlarCreateDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

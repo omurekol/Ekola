@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="KonularViewDlg" widgetVar="KonularViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{bundleMyBundle.ViewKonularTitle}" closeOnEscape="true">
+
+            <h:form id="KonularViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{konularController.selected != null}">
+
+                        <h:outputText value="#{bundleMyBundle.ViewKonularLabel_konuId}"/>
+                        <h:outputText value="#{konularController.selected.konuId}" title="#{bundleMyBundle.ViewKonularTitle_konuId}"/>
+
+                        <h:outputText value="#{bundleMyBundle.ViewKonularLabel_konuYorumId}"/>
+                        <h:outputText value="#{konularController.selected.konuYorumId}" title="#{bundleMyBundle.ViewKonularTitle_konuYorumId}"/>
+
+                        <h:outputText value="#{bundleMyBundle.ViewKonularLabel_konuYazariId}"/>
+                        <h:outputText value="#{konularController.selected.konuYazariId}" title="#{bundleMyBundle.ViewKonularTitle_konuYazariId}"/>
+
+                        <h:outputText value="#{bundleMyBundle.ViewKonularLabel_konuBaslik}"/>
+                        <h:outputText value="#{konularController.selected.konuBaslik}" title="#{bundleMyBundle.ViewKonularTitle_konuBaslik}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundleMyBundle.Close}" onclick="PF('KonularViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

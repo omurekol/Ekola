@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="UyelerListForm">
+
+        <p:panel header="#{bundleMyBundle.ListUyelerTitle}">
+            <p:contextMenu id="UyelerDataTableContextMenu" for="datalist">  
+                <p:menuitem value="#{bundleMyBundle.Create}" onclick="document.getElementById('UyelerListForm:createButton').click();" icon="ui-icon-plus"/>
+                <p:menuitem value="#{bundleMyBundle.View}" onclick="document.getElementById('UyelerListForm:viewButton').click();" icon="ui-icon-search"/>
+                <p:menuitem value="#{bundleMyBundle.Edit}" onclick="document.getElementById('UyelerListForm:editButton').click();" icon="ui-icon-pencil"/>
+                <p:menuitem value="#{bundleMyBundle.Delete}" onclick="document.getElementById('UyelerListForm:deleteButton').click();" icon="ui-icon-trash"/>
+            </p:contextMenu>
+            <p:dataTable id="datalist"
+                         value="#{uyelerController.items}"
+                         var="item"
+                         rowKey="#{item.uyeId}"
+                         paginator="true"
+                         rows="10"
+                         rowsPerPageTemplate="10,20,30,40,50"
+                         selectionMode="single"
+                         selection="#{uyelerController.selected}">
+
+                <p:ajax event="rowSelect"   update=":UyelerListForm:createButton :UyelerListForm:viewButton :UyelerListForm:editButton :UyelerListForm:deleteButton :UyelerListForm:UyelerDataTableContextMenu"/>
+                <p:ajax event="rowUnselect" update=":UyelerListForm:createButton :UyelerListForm:viewButton :UyelerListForm:editButton :UyelerListForm:deleteButton :UyelerListForm:UyelerDataTableContextMenu"/>
+                <p:ajax event="rowDblselect" onsuccess="document.getElementById('UyelerListForm:viewButton').click();"/>
+        <f:facet name="{Exporters}">
+            <h:commandLink>
+                <p:graphicImage name="/resources/img/excel.png" width="24"/>
+                <p:dataExporter type="xls" target="datalist" fileName="items" />
+            </h:commandLink>
+ 
+            <h:commandLink>
+                <p:graphicImage name="/demo/images/pdf.png" width="24"/>
+                <p:dataExporter type="pdf" target="datalist" fileName="items"/>
+            </h:commandLink>
+ 
+            <h:commandLink>
+                <p:graphicImage name="/demo/images/csv.png" width="24"/>
+                <p:dataExporter type="csv" target="datalist" fileName="items" />
+            </h:commandLink>
+ 
+            <h:commandLink>
+                <p:graphicImage name="/demo/images/xml.png" width="24"/>
+                <p:dataExporter type="xml" target="datalist" fileName="items" />
+            </h:commandLink>
+        </f:facet>
+                <p:column sortBy="#{item.uyeId}" filterBy="#{item.uyeId}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundleMyBundle.ListUyelerTitle_uyeId}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.uyeId}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.uyeKadi}" filterBy="#{item.uyeKadi}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundleMyBundle.ListUyelerTitle_uyeKadi}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.uyeKadi}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.uyeSifre}" filterBy="#{item.uyeSifre}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundleMyBundle.ListUyelerTitle_uyeSifre}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.uyeSifre}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.uyeEposta}" filterBy="#{item.uyeEposta}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundleMyBundle.ListUyelerTitle_uyeEposta}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.uyeEposta}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.uyeTarih}" filterBy="#{item.uyeTarih}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundleMyBundle.ListUyelerTitle_uyeTarih}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.uyeTarih}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                </p:column>
+
+
+                <p:column sortBy="#{item.uyeRutbe}" filterBy="#{item.uyeRutbe}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundleMyBundle.ListUyelerTitle_uyeRutbe}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.uyeRutbe}"/>
+                </p:column>
+
+                <!--
+                                    <p:column sortBy="#{item.uyeOnay}" filterBy="#{item.uyeOnay}">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{bundleMyBundle.ListUyelerTitle_uyeOnay}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.uyeOnay}"/>
+                                    </p:column>
+                -->
+                <!--
+                                    <p:column sortBy="#{item.uyeAvatar}" filterBy="#{item.uyeAvatar}">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{bundleMyBundle.ListUyelerTitle_uyeAvatar}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.uyeAvatar}"/>
+                                    </p:column>
+                -->
+                <!--
+                                    <p:column sortBy="#{item.uyeYorum}" filterBy="#{item.uyeYorum}">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{bundleMyBundle.ListUyelerTitle_uyeYorum}"/>
+                                        </f:facet>
+                                        <h:selectBooleanCheckbox id="uyeYorum" value="#{item.uyeYorum}" title="#{bundleMyBundle.EditUyelerTitle_uyeYorum}" required="true" requiredMessage="#{bundleMyBundle.EditUyelerRequiredMessage_uyeYorum}" disabled="true"/>
+                                    </p:column>
+                -->
+
+            </p:dataTable>
+
+            <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{bundleMyBundle.Create}" actionListener="#{uyelerController.prepareCreate}" update=":UyelerCreateForm" oncomplete="PF('UyelerCreateDialog').show()"/>
+            <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{bundleMyBundle.View}" update=":UyelerViewForm" oncomplete="PF('UyelerViewDialog').show()" disabled="#{empty uyelerController.selected}"/>
+            <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{bundleMyBundle.Edit}" update=":UyelerEditForm" oncomplete="PF('UyelerEditDialog').show()" disabled="#{empty uyelerController.selected}"/>
+            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{bundleMyBundle.Delete}" actionListener="#{uyelerController.delete}" update=":growl,datalist" disabled="#{empty uyelerController.selected}">
+                <p:confirm header="#{bundleMyBundle.ConfirmationHeader}" message="#{bundleMyBundle.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+            </p:commandButton>
+
+        </p:panel>
+        <ui:include src="/confirmation.xhtml"/>
+    </h:form>
+
+</ui:composition>

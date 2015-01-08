@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="KategorilerViewDlg" widgetVar="KategorilerViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{bundleMyBundle.ViewKategorilerTitle}" closeOnEscape="true">
+
+            <h:form id="KategorilerViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{kategorilerController.selected != null}">
+
+                        <h:outputText value="#{bundleMyBundle.ViewKategorilerLabel_kategoriId}"/>
+                        <h:outputText value="#{kategorilerController.selected.kategoriId}" title="#{bundleMyBundle.ViewKategorilerTitle_kategoriId}"/>
+
+                        <h:outputText value="#{bundleMyBundle.ViewKategorilerLabel_kategoriAdi}"/>
+                        <h:outputText value="#{kategorilerController.selected.kategoriAdi}" title="#{bundleMyBundle.ViewKategorilerTitle_kategoriAdi}"/>
+
+                        <h:outputText value="#{bundleMyBundle.ViewKategorilerLabel_kategoriTarih}"/>
+                        <h:outputText value="#{kategorilerController.selected.kategoriTarih}" title="#{bundleMyBundle.ViewKategorilerTitle_kategoriTarih}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+
+                        <h:outputText value="#{bundleMyBundle.ViewKategorilerLabel_kategoriLink}"/>
+                        <h:outputText value="#{kategorilerController.selected.kategoriLink}" title="#{bundleMyBundle.ViewKategorilerTitle_kategoriLink}"/>
+
+                        <h:outputText value="#{bundleMyBundle.ViewKategorilerLabel_kategoriDesc}"/>
+                        <h:outputText value="#{kategorilerController.selected.kategoriDesc}" title="#{bundleMyBundle.ViewKategorilerTitle_kategoriDesc}"/>
+
+                        <h:outputText value="#{bundleMyBundle.ViewKategorilerLabel_kategoriKeyw}"/>
+                        <h:outputText value="#{kategorilerController.selected.kategoriKeyw}" title="#{bundleMyBundle.ViewKategorilerTitle_kategoriKeyw}"/>
+
+                        <h:outputText value="#{bundleMyBundle.ViewKategorilerLabel_kategoriAnasayfaKonu}"/>
+                        <h:outputText value="#{kategorilerController.selected.kategoriAnasayfaKonu}" title="#{bundleMyBundle.ViewKategorilerTitle_kategoriAnasayfaKonu}"/>
+
+                        <h:outputText value="#{bundleMyBundle.ViewKategorilerLabel_kategoriFullKonu}"/>
+                        <h:outputText value="#{kategorilerController.selected.kategoriFullKonu}" title="#{bundleMyBundle.ViewKategorilerTitle_kategoriFullKonu}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundleMyBundle.Close}" onclick="PF('KategorilerViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

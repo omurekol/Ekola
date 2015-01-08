@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UyelerViewDlg" widgetVar="UyelerViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{bundleMyBundle.ViewUyelerTitle}" closeOnEscape="true">
+
+            <h:form id="UyelerViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{uyelerController.selected != null}">
+
+                        <h:outputText value="#{bundleMyBundle.ViewUyelerLabel_uyeId}"/>
+                        <h:outputText value="#{uyelerController.selected.uyeId}" title="#{bundleMyBundle.ViewUyelerTitle_uyeId}"/>
+
+                        <h:outputText value="#{bundleMyBundle.ViewUyelerLabel_uyeKadi}"/>
+                        <h:outputText value="#{uyelerController.selected.uyeKadi}" title="#{bundleMyBundle.ViewUyelerTitle_uyeKadi}"/>
+
+                        <h:outputText value="#{bundleMyBundle.ViewUyelerLabel_uyeSifre}"/>
+                        <h:outputText value="#{uyelerController.selected.uyeSifre}" title="#{bundleMyBundle.ViewUyelerTitle_uyeSifre}"/>
+
+                        <h:outputText value="#{bundleMyBundle.ViewUyelerLabel_uyeEposta}"/>
+                        <h:outputText value="#{uyelerController.selected.uyeEposta}" title="#{bundleMyBundle.ViewUyelerTitle_uyeEposta}"/>
+
+                        <h:outputText value="#{bundleMyBundle.ViewUyelerLabel_uyeTarih}"/>
+                        <h:outputText value="#{uyelerController.selected.uyeTarih}" title="#{bundleMyBundle.ViewUyelerTitle_uyeTarih}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+
+                        <h:outputText value="#{bundleMyBundle.ViewUyelerLabel_uyeRutbe}"/>
+                        <h:outputText value="#{uyelerController.selected.uyeRutbe}" title="#{bundleMyBundle.ViewUyelerTitle_uyeRutbe}"/>
+
+                        <h:outputText value="#{bundleMyBundle.ViewUyelerLabel_uyeOnay}"/>
+                        <h:outputText value="#{uyelerController.selected.uyeOnay}" title="#{bundleMyBundle.ViewUyelerTitle_uyeOnay}"/>
+
+                        <h:outputText value="#{bundleMyBundle.ViewUyelerLabel_uyeAvatar}"/>
+                        <h:outputText value="#{uyelerController.selected.uyeAvatar}" title="#{bundleMyBundle.ViewUyelerTitle_uyeAvatar}"/>
+
+                        <h:outputText value="#{bundleMyBundle.ViewUyelerLabel_uyeYorum}"/>
+                        <h:selectBooleanCheckbox id="uyeYorum" value="#{uyelerController.selected.uyeYorum}" title="#{bundleMyBundle.EditUyelerTitle_uyeYorum}" required="true" requiredMessage="#{bundleMyBundle.EditUyelerRequiredMessage_uyeYorum}" disabled="true"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundleMyBundle.Close}" onclick="PF('UyelerViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="KonularEditDlg" widgetVar="KonularEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{bundleMyBundle.EditKonularTitle}" closeOnEscape="true">
+
+            <h:form id="KonularEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" columnClasses="column" rendered="#{konularController.selected != null}">
+
+
+                        <h:outputLabel value="#{bundleMyBundle.EditKonularLabel_konuId}" for="konuId" />
+                        <h:outputText id="konuId" value="#{konularController.selected.konuId}" />
+
+                        <p:outputLabel value="#{bundleMyBundle.EditKonularLabel_konuYorumId}" for="konuYorumId" />
+                        <p:inputText id="konuYorumId" value="#{konularController.selected.konuYorumId}" title="#{bundleMyBundle.EditKonularTitle_konuYorumId}" required="true" requiredMessage="#{bundleMyBundle.EditKonularRequiredMessage_konuYorumId}"/>
+
+                        <p:outputLabel value="#{bundleMyBundle.EditKonularLabel_konuYazariId}" for="konuYazariId" />
+                        <p:inputText id="konuYazariId" value="#{konularController.selected.konuYazariId}" title="#{bundleMyBundle.EditKonularTitle_konuYazariId}" required="true" requiredMessage="#{bundleMyBundle.EditKonularRequiredMessage_konuYazariId}"/>
+
+                        <p:outputLabel value="#{bundleMyBundle.EditKonularLabel_konuBaslik}" for="konuBaslik" />
+                        <p:inputText id="konuBaslik" value="#{konularController.selected.konuBaslik}" title="#{bundleMyBundle.EditKonularTitle_konuBaslik}" required="true" requiredMessage="#{bundleMyBundle.EditKonularRequiredMessage_konuBaslik}" size="50" maxlength="50"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{konularController.save}" value="#{bundleMyBundle.Save}" update="display,:KonularListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('KonularEditDialog'));">
+                        <p:confirm header="#{bundleMyBundle.ConfirmationHeader}" message="#{bundleMyBundle.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{bundleMyBundle.Cancel}" onclick="PF('KonularEditDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

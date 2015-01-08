@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="BegenilerCreateDlg" widgetVar="BegenilerCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleMyBundle.CreateBegenilerTitle}" closeOnEscape="true">
+
+            <h:form id="BegenilerCreateForm">
+
+                <h:panelGroup id="display" rendered="#{begenilerController.selected != null}">
+                    <p:panelGrid columns="2" columnClasses="column">
+
+                        <p:outputLabel value="#{bundleMyBundle.CreateBegenilerLabel_yorumId}" for="yorumId" />
+                        <p:inputText id="yorumId" value="#{begenilerController.selected.yorumId}" title="#{bundleMyBundle.CreateBegenilerTitle_yorumId}" required="true" requiredMessage="#{bundleMyBundle.CreateBegenilerRequiredMessage_yorumId}"/>
+
+                        <p:outputLabel value="#{bundleMyBundle.CreateBegenilerLabel_begenenId}" for="begenenId" />
+                        <p:inputText id="begenenId" value="#{begenilerController.selected.begenenId}" title="#{bundleMyBundle.CreateBegenilerTitle_begenenId}" required="true" requiredMessage="#{bundleMyBundle.CreateBegenilerRequiredMessage_begenenId}"/>
+
+                        <p:outputLabel value="#{bundleMyBundle.CreateBegenilerLabel_begenenAdi}" for="begenenAdi" />
+                        <p:inputText id="begenenAdi" value="#{begenilerController.selected.begenenAdi}" title="#{bundleMyBundle.CreateBegenilerTitle_begenenAdi}" required="true" requiredMessage="#{bundleMyBundle.CreateBegenilerRequiredMessage_begenenAdi}" size="50" maxlength="50"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{begenilerController.saveNew}" value="#{bundleMyBundle.Save}" update="display,:BegenilerListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('BegenilerCreateDialog'));">
+                        <p:confirm header="#{bundleMyBundle.ConfirmationHeader}" message="#{bundleMyBundle.ConfirmCreateMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="#{bundleMyBundle.Cancel}" onclick="PF('BegenilerCreateDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="BegenilerListForm">
+
+        <p:panel header="#{bundleMyBundle.ListBegenilerTitle}">
+            <p:contextMenu id="BegenilerDataTableContextMenu" for="datalist">  
+                <p:menuitem value="#{bundleMyBundle.Create}" onclick="document.getElementById('BegenilerListForm:createButton').click();" icon="ui-icon-plus"/>
+                <p:menuitem value="#{bundleMyBundle.View}" onclick="document.getElementById('BegenilerListForm:viewButton').click();" icon="ui-icon-search"/>
+                <p:menuitem value="#{bundleMyBundle.Edit}" onclick="document.getElementById('BegenilerListForm:editButton').click();" icon="ui-icon-pencil"/>
+                <p:menuitem value="#{bundleMyBundle.Delete}" onclick="document.getElementById('BegenilerListForm:deleteButton').click();" icon="ui-icon-trash"/>
+            </p:contextMenu>
+            <p:dataTable id="datalist"
+                         value="#{begenilerController.items}"
+                         var="item"
+                         rowKey="#{item.begeniId}"
+                         paginator="true"
+                         rows="10"
+                         rowsPerPageTemplate="10,20,30,40,50"
+                         selectionMode="single"
+                         selection="#{begenilerController.selected}">
+
+                <p:ajax event="rowSelect"   update=":BegenilerListForm:createButton :BegenilerListForm:viewButton :BegenilerListForm:editButton :BegenilerListForm:deleteButton :BegenilerListForm:BegenilerDataTableContextMenu"/>
+                <p:ajax event="rowUnselect" update=":BegenilerListForm:createButton :BegenilerListForm:viewButton :BegenilerListForm:editButton :BegenilerListForm:deleteButton :BegenilerListForm:BegenilerDataTableContextMenu"/>
+                <p:ajax event="rowDblselect" onsuccess="document.getElementById('BegenilerListForm:viewButton').click();"/>
+
+                <p:column sortBy="#{item.begeniId}" filterBy="#{item.begeniId}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundleMyBundle.ListBegenilerTitle_begeniId}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.begeniId}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.yorumId}" filterBy="#{item.yorumId}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundleMyBundle.ListBegenilerTitle_yorumId}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.yorumId}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.begenenId}" filterBy="#{item.begenenId}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundleMyBundle.ListBegenilerTitle_begenenId}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.begenenId}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.begenenAdi}" filterBy="#{item.begenenAdi}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundleMyBundle.ListBegenilerTitle_begenenAdi}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.begenenAdi}"/>
+                </p:column>
+
+
+            </p:dataTable>
+
+            <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{bundleMyBundle.Create}" actionListener="#{begenilerController.prepareCreate}" update=":BegenilerCreateForm" oncomplete="PF('BegenilerCreateDialog').show()"/>
+            <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{bundleMyBundle.View}" update=":BegenilerViewForm" oncomplete="PF('BegenilerViewDialog').show()" disabled="#{empty begenilerController.selected}"/>
+            <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{bundleMyBundle.Edit}" update=":BegenilerEditForm" oncomplete="PF('BegenilerEditDialog').show()" disabled="#{empty begenilerController.selected}"/>
+            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{bundleMyBundle.Delete}" actionListener="#{begenilerController.delete}" update=":growl,datalist" disabled="#{empty begenilerController.selected}">
+                <p:confirm header="#{bundleMyBundle.ConfirmationHeader}" message="#{bundleMyBundle.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+            </p:commandButton>
+
+        </p:panel>
+        <ui:include src="/confirmation.xhtml"/>
+    </h:form>
+
+</ui:composition>

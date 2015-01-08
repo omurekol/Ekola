@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="BegenilerViewDlg" widgetVar="BegenilerViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{bundleMyBundle.ViewBegenilerTitle}" closeOnEscape="true">
+
+            <h:form id="BegenilerViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{begenilerController.selected != null}">
+
+                        <h:outputText value="#{bundleMyBundle.ViewBegenilerLabel_begeniId}"/>
+                        <h:outputText value="#{begenilerController.selected.begeniId}" title="#{bundleMyBundle.ViewBegenilerTitle_begeniId}"/>
+
+                        <h:outputText value="#{bundleMyBundle.ViewBegenilerLabel_yorumId}"/>
+                        <h:outputText value="#{begenilerController.selected.yorumId}" title="#{bundleMyBundle.ViewBegenilerTitle_yorumId}"/>
+
+                        <h:outputText value="#{bundleMyBundle.ViewBegenilerLabel_begenenId}"/>
+                        <h:outputText value="#{begenilerController.selected.begenenId}" title="#{bundleMyBundle.ViewBegenilerTitle_begenenId}"/>
+
+                        <h:outputText value="#{bundleMyBundle.ViewBegenilerLabel_begenenAdi}"/>
+                        <h:outputText value="#{begenilerController.selected.begenenAdi}" title="#{bundleMyBundle.ViewBegenilerTitle_begenenAdi}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundleMyBundle.Close}" onclick="PF('BegenilerViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

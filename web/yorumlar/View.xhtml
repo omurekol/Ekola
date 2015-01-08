@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="YorumlarViewDlg" widgetVar="YorumlarViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{bundleMyBundle.ViewYorumlarTitle}" closeOnEscape="true">
+
+            <h:form id="YorumlarViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{yorumlarController.selected != null}">
+
+                        <h:outputText value="#{bundleMyBundle.ViewYorumlarLabel_yorumId}"/>
+                        <h:outputText value="#{yorumlarController.selected.yorumId}" title="#{bundleMyBundle.ViewYorumlarTitle_yorumId}"/>
+
+                        <h:outputText value="#{bundleMyBundle.ViewYorumlarLabel_uyeId}"/>
+                        <h:outputText value="#{yorumlarController.selected.uyeId}" title="#{bundleMyBundle.ViewYorumlarTitle_uyeId}"/>
+
+                        <h:outputText value="#{bundleMyBundle.ViewYorumlarLabel_konuId}"/>
+                        <h:outputText value="#{yorumlarController.selected.konuId}" title="#{bundleMyBundle.ViewYorumlarTitle_konuId}"/>
+
+                        <h:outputText value="#{bundleMyBundle.ViewYorumlarLabel_begenenId}"/>
+                        <h:outputText value="#{yorumlarController.selected.begenenId}" title="#{bundleMyBundle.ViewYorumlarTitle_begenenId}"/>
+
+                        <h:outputText value="#{bundleMyBundle.ViewYorumlarLabel_yorumBaslik}"/>
+                        <h:outputText value="#{yorumlarController.selected.yorumBaslik}" title="#{bundleMyBundle.ViewYorumlarTitle_yorumBaslik}"/>
+
+                        <h:outputText value="#{bundleMyBundle.ViewYorumlarLabel_yorumIcerik}"/>
+                        <h:outputText value="#{yorumlarController.selected.yorumIcerik}" title="#{bundleMyBundle.ViewYorumlarTitle_yorumIcerik}"/>
+
+                        <h:outputText value="#{bundleMyBundle.ViewYorumlarLabel_yorumTarihi}"/>
+                        <h:outputText value="#{yorumlarController.selected.yorumTarihi}" title="#{bundleMyBundle.ViewYorumlarTitle_yorumTarihi}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+
+                        <h:outputText value="#{bundleMyBundle.ViewYorumlarLabel_yorumsuzlukAvatarı}"/>
+                        <h:outputText value="#{yorumlarController.selected.yorumsuzlukAvatarı}" title="#{bundleMyBundle.ViewYorumlarTitle_yorumsuzlukAvatarı}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundleMyBundle.Close}" onclick="PF('YorumlarViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

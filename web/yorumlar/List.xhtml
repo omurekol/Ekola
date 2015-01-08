@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="YorumlarListForm">
+
+        <p:panel header="#{bundleMyBundle.ListYorumlarTitle}">
+            <p:contextMenu id="YorumlarDataTableContextMenu" for="datalist">  
+                <p:menuitem value="#{bundleMyBundle.Create}" onclick="document.getElementById('YorumlarListForm:createButton').click();" icon="ui-icon-plus"/>
+                <p:menuitem value="#{bundleMyBundle.View}" onclick="document.getElementById('YorumlarListForm:viewButton').click();" icon="ui-icon-search"/>
+                <p:menuitem value="#{bundleMyBundle.Edit}" onclick="document.getElementById('YorumlarListForm:editButton').click();" icon="ui-icon-pencil"/>
+                <p:menuitem value="#{bundleMyBundle.Delete}" onclick="document.getElementById('YorumlarListForm:deleteButton').click();" icon="ui-icon-trash"/>
+            </p:contextMenu>
+            <p:dataTable id="datalist"
+                         value="#{yorumlarController.items}"
+                         var="item"
+                         rowKey="#{item.yorumId}"
+                         paginator="true"
+                         rows="10"
+                         rowsPerPageTemplate="10,20,30,40,50"
+                         selectionMode="single"
+                         selection="#{yorumlarController.selected}">
+
+                <p:ajax event="rowSelect"   update=":YorumlarListForm:createButton :YorumlarListForm:viewButton :YorumlarListForm:editButton :YorumlarListForm:deleteButton :YorumlarListForm:YorumlarDataTableContextMenu"/>
+                <p:ajax event="rowUnselect" update=":YorumlarListForm:createButton :YorumlarListForm:viewButton :YorumlarListForm:editButton :YorumlarListForm:deleteButton :YorumlarListForm:YorumlarDataTableContextMenu"/>
+                <p:ajax event="rowDblselect" onsuccess="document.getElementById('YorumlarListForm:viewButton').click();"/>
+        <f:facet name="{Exporters}">
+            <h:commandLink>
+                <p:graphicImage name="/demo/images/excel.png" width="24"/>
+                <p:dataExporter type="xls" target="datalist" fileName="items" />
+            </h:commandLink>
+ 
+            <h:commandLink>
+                <p:graphicImage name="/demo/images/pdf.png" width="24"/>
+                <p:dataExporter type="pdf" target="datalist" fileName="items"/>
+            </h:commandLink>
+ 
+            <h:commandLink>
+                <p:graphicImage name="/demo/images/csv.png" width="24"/>
+                <p:dataExporter type="csv" target="datalist" fileName="items" />
+            </h:commandLink>
+ 
+            <h:commandLink>
+                <p:graphicImage name="/demo/images/xml.png" width="24"/>
+                <p:dataExporter type="xml" target="datalist" fileName="items" />
+            </h:commandLink>
+        </f:facet>
+                <p:column sortBy="#{item.yorumId}" filterBy="#{item.yorumId}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundleMyBundle.ListYorumlarTitle_yorumId}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.yorumId}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.uyeId}" filterBy="#{item.uyeId}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundleMyBundle.ListYorumlarTitle_uyeId}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.uyeId}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.konuId}" filterBy="#{item.konuId}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundleMyBundle.ListYorumlarTitle_konuId}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.konuId}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.begenenId}" filterBy="#{item.begenenId}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundleMyBundle.ListYorumlarTitle_begenenId}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.begenenId}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.yorumBaslik}" filterBy="#{item.yorumBaslik}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundleMyBundle.ListYorumlarTitle_yorumBaslik}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.yorumBaslik}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.yorumIcerik}" filterBy="#{item.yorumIcerik}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundleMyBundle.ListYorumlarTitle_yorumIcerik}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.yorumIcerik}"/>
+                </p:column>
+
+                <!--
+                                    <p:column sortBy="#{item.yorumTarihi}" filterBy="#{item.yorumTarihi}">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{bundleMyBundle.ListYorumlarTitle_yorumTarihi}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.yorumTarihi}">
+                                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                                        </h:outputText>
+                                    </p:column>
+                -->
+                <!--
+                                    <p:column sortBy="#{item.yorumsuzlukAvatarı}" filterBy="#{item.yorumsuzlukAvatarı}">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{bundleMyBundle.ListYorumlarTitle_yorumsuzlukAvatarı}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.yorumsuzlukAvatarı}"/>
+                                    </p:column>
+                -->
+
+            </p:dataTable>
+
+            <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{bundleMyBundle.Create}" actionListener="#{yorumlarController.prepareCreate}" update=":YorumlarCreateForm" oncomplete="PF('YorumlarCreateDialog').show()"/>
+            <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{bundleMyBundle.View}" update=":YorumlarViewForm" oncomplete="PF('YorumlarViewDialog').show()" disabled="#{empty yorumlarController.selected}"/>
+            <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{bundleMyBundle.Edit}" update=":YorumlarEditForm" oncomplete="PF('YorumlarEditDialog').show()" disabled="#{empty yorumlarController.selected}"/>
+            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{bundleMyBundle.Delete}" actionListener="#{yorumlarController.delete}" update=":growl,datalist" disabled="#{empty yorumlarController.selected}">
+                <p:confirm header="#{bundleMyBundle.ConfirmationHeader}" message="#{bundleMyBundle.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+            </p:commandButton>
+
+        </p:panel>
+        <ui:include src="/confirmation.xhtml"/>
+    </h:form>
+
+</ui:composition>

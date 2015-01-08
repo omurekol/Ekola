@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="KategorilerListForm">
+
+        <p:panel header="#{bundleMyBundle.ListKategorilerTitle}">
+            <p:contextMenu id="KategorilerDataTableContextMenu" for="datalist">  
+                <p:menuitem value="#{bundleMyBundle.Create}" onclick="document.getElementById('KategorilerListForm:createButton').click();" icon="ui-icon-plus"/>
+                <p:menuitem value="#{bundleMyBundle.View}" onclick="document.getElementById('KategorilerListForm:viewButton').click();" icon="ui-icon-search"/>
+                <p:menuitem value="#{bundleMyBundle.Edit}" onclick="document.getElementById('KategorilerListForm:editButton').click();" icon="ui-icon-pencil"/>
+                <p:menuitem value="#{bundleMyBundle.Delete}" onclick="document.getElementById('KategorilerListForm:deleteButton').click();" icon="ui-icon-trash"/>
+            </p:contextMenu>
+            <p:dataTable id="datalist"
+                         value="#{kategorilerController.items}"
+                         var="item"
+                         rowKey="#{item.kategoriId}"
+                         paginator="true"
+                         rows="10"
+                         rowsPerPageTemplate="10,20,30,40,50"
+                         selectionMode="single"
+                         selection="#{kategorilerController.selected}">
+
+                <p:ajax event="rowSelect"   update=":KategorilerListForm:createButton :KategorilerListForm:viewButton :KategorilerListForm:editButton :KategorilerListForm:deleteButton :KategorilerListForm:KategorilerDataTableContextMenu"/>
+                <p:ajax event="rowUnselect" update=":KategorilerListForm:createButton :KategorilerListForm:viewButton :KategorilerListForm:editButton :KategorilerListForm:deleteButton :KategorilerListForm:KategorilerDataTableContextMenu"/>
+                <p:ajax event="rowDblselect" onsuccess="document.getElementById('KategorilerListForm:viewButton').click();"/>
+
+                <p:column sortBy="#{item.kategoriId}" filterBy="#{item.kategoriId}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundleMyBundle.ListKategorilerTitle_kategoriId}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.kategoriId}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.kategoriAdi}" filterBy="#{item.kategoriAdi}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundleMyBundle.ListKategorilerTitle_kategoriAdi}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.kategoriAdi}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.kategoriTarih}" filterBy="#{item.kategoriTarih}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundleMyBundle.ListKategorilerTitle_kategoriTarih}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.kategoriTarih}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                </p:column>
+
+
+                <p:column sortBy="#{item.kategoriLink}" filterBy="#{item.kategoriLink}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundleMyBundle.ListKategorilerTitle_kategoriLink}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.kategoriLink}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.kategoriDesc}" filterBy="#{item.kategoriDesc}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundleMyBundle.ListKategorilerTitle_kategoriDesc}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.kategoriDesc}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.kategoriKeyw}" filterBy="#{item.kategoriKeyw}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundleMyBundle.ListKategorilerTitle_kategoriKeyw}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.kategoriKeyw}"/>
+                </p:column>
+
+                <!--
+                                    <p:column sortBy="#{item.kategoriAnasayfaKonu}" filterBy="#{item.kategoriAnasayfaKonu}">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{bundleMyBundle.ListKategorilerTitle_kategoriAnasayfaKonu}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.kategoriAnasayfaKonu}"/>
+                                    </p:column>
+                -->
+                <!--
+                                    <p:column sortBy="#{item.kategoriFullKonu}" filterBy="#{item.kategoriFullKonu}">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{bundleMyBundle.ListKategorilerTitle_kategoriFullKonu}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.kategoriFullKonu}"/>
+                                    </p:column>
+                -->
+
+            </p:dataTable>
+
+            <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{bundleMyBundle.Create}" actionListener="#{kategorilerController.prepareCreate}" update=":KategorilerCreateForm" oncomplete="PF('KategorilerCreateDialog').show()"/>
+            <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{bundleMyBundle.View}" update=":KategorilerViewForm" oncomplete="PF('KategorilerViewDialog').show()" disabled="#{empty kategorilerController.selected}"/>
+            <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{bundleMyBundle.Edit}" update=":KategorilerEditForm" oncomplete="PF('KategorilerEditDialog').show()" disabled="#{empty kategorilerController.selected}"/>
+            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{bundleMyBundle.Delete}" actionListener="#{kategorilerController.delete}" update=":growl,datalist" disabled="#{empty kategorilerController.selected}">
+                <p:confirm header="#{bundleMyBundle.ConfirmationHeader}" message="#{bundleMyBundle.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+            </p:commandButton>
+
+        </p:panel>
+        <ui:include src="/confirmation.xhtml"/>
+    </h:form>
+
+</ui:composition>

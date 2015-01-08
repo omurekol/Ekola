@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="KonuluyorumlarViewDlg" widgetVar="KonuluyorumlarViewDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{bundleMyBundle.ViewKonuluyorumlarTitle}" closeOnEscape="true">
+
+            <h:form id="KonuluyorumlarViewForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="column" rendered="#{konuluyorumlarController.selected != null}">
+
+                        <h:outputText value="#{bundleMyBundle.ViewKonuluyorumlarLabel_konuluyorumlarPK_konularId}"/>
+                        <h:outputText value="#{konuluyorumlarController.selected.konuluyorumlarPK.konularId}" title="#{bundleMyBundle.ViewKonuluyorumlarTitle_konuluyorumlarPK_konularId}"/>
+
+                        <h:outputText value="#{bundleMyBundle.ViewKonuluyorumlarLabel_konuluyorumlarPK_yorumlarId}"/>
+                        <h:outputText value="#{konuluyorumlarController.selected.konuluyorumlarPK.yorumlarId}" title="#{bundleMyBundle.ViewKonuluyorumlarTitle_konuluyorumlarPK_yorumlarId}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundleMyBundle.Close}" onclick="PF('KonuluyorumlarViewDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

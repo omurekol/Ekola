@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="KonuluyorumlarListForm">
+
+        <p:panel header="#{bundleMyBundle.ListKonuluyorumlarTitle}">
+            <p:contextMenu id="KonuluyorumlarDataTableContextMenu" for="datalist">  
+                <p:menuitem value="#{bundleMyBundle.Create}" onclick="document.getElementById('KonuluyorumlarListForm:createButton').click();" icon="ui-icon-plus"/>
+                <p:menuitem value="#{bundleMyBundle.View}" onclick="document.getElementById('KonuluyorumlarListForm:viewButton').click();" icon="ui-icon-search"/>
+                <p:menuitem value="#{bundleMyBundle.Edit}" onclick="document.getElementById('KonuluyorumlarListForm:editButton').click();" icon="ui-icon-pencil"/>
+                <p:menuitem value="#{bundleMyBundle.Delete}" onclick="document.getElementById('KonuluyorumlarListForm:deleteButton').click();" icon="ui-icon-trash"/>
+            </p:contextMenu>
+            <p:dataTable id="datalist"
+                         value="#{konuluyorumlarController.items}"
+                         var="item"
+                         rowKey="#{item.konuluyorumlarPK}"
+                         paginator="true"
+                         rows="10"
+                         rowsPerPageTemplate="10,20,30,40,50"
+                         selectionMode="single"
+                         selection="#{konuluyorumlarController.selected}">
+
+                <p:ajax event="rowSelect"   update=":KonuluyorumlarListForm:createButton :KonuluyorumlarListForm:viewButton :KonuluyorumlarListForm:editButton :KonuluyorumlarListForm:deleteButton :KonuluyorumlarListForm:KonuluyorumlarDataTableContextMenu"/>
+                <p:ajax event="rowUnselect" update=":KonuluyorumlarListForm:createButton :KonuluyorumlarListForm:viewButton :KonuluyorumlarListForm:editButton :KonuluyorumlarListForm:deleteButton :KonuluyorumlarListForm:KonuluyorumlarDataTableContextMenu"/>
+                <p:ajax event="rowDblselect" onsuccess="document.getElementById('KonuluyorumlarListForm:viewButton').click();"/>
+
+                <p:column sortBy="#{item.konuluyorumlarPK.konularId}" filterBy="#{item.konuluyorumlarPK.konularId}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundleMyBundle.ListKonuluyorumlarTitle_konuluyorumlarPK_konularId}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.konuluyorumlarPK.konularId}"/>
+                </p:column>
+
+
+                <p:column sortBy="#{item.konuluyorumlarPK.yorumlarId}" filterBy="#{item.konuluyorumlarPK.yorumlarId}">
+                    <f:facet name="header">
+                        <h:outputText value="#{bundleMyBundle.ListKonuluyorumlarTitle_konuluyorumlarPK_yorumlarId}"/>
+                    </f:facet>
+                    <h:outputText value="#{item.konuluyorumlarPK.yorumlarId}"/>
+                </p:column>
+
+
+            </p:dataTable>
+
+            <p:commandButton id="createButton"                             icon="ui-icon-plus"   value="#{bundleMyBundle.Create}" actionListener="#{konuluyorumlarController.prepareCreate}" update=":KonuluyorumlarCreateForm" oncomplete="PF('KonuluyorumlarCreateDialog').show()"/>
+            <p:commandButton id="viewButton"   style="visibility: hidden;" icon="ui-icon-search" value="#{bundleMyBundle.View}" update=":KonuluyorumlarViewForm" oncomplete="PF('KonuluyorumlarViewDialog').show()" disabled="#{empty konuluyorumlarController.selected}"/>
+            <p:commandButton id="editButton"   style="visibility: hidden;" icon="ui-icon-pencil" value="#{bundleMyBundle.Edit}" update=":KonuluyorumlarEditForm" oncomplete="PF('KonuluyorumlarEditDialog').show()" disabled="#{empty konuluyorumlarController.selected}"/>
+            <p:commandButton id="deleteButton" style="visibility: hidden;" icon="ui-icon-trash"  value="#{bundleMyBundle.Delete}" actionListener="#{konuluyorumlarController.delete}" update=":growl,datalist" disabled="#{empty konuluyorumlarController.selected}">
+                <p:confirm header="#{bundleMyBundle.ConfirmationHeader}" message="#{bundleMyBundle.ConfirmDeleteMessage}" icon="ui-icon-alert"/>
+            </p:commandButton>
+
+        </p:panel>
+        <ui:include src="/confirmation.xhtml"/>
+    </h:form>
+
+</ui:composition>

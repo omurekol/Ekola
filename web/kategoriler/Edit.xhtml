@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="KategorilerEditDlg" widgetVar="KategorilerEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{bundleMyBundle.EditKategorilerTitle}" closeOnEscape="true">
+
+            <h:form id="KategorilerEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" columnClasses="column" rendered="#{kategorilerController.selected != null}">
+
+
+                        <h:outputLabel value="#{bundleMyBundle.EditKategorilerLabel_kategoriId}" for="kategoriId" />
+                        <h:outputText id="kategoriId" value="#{kategorilerController.selected.kategoriId}" />
+
+                        <p:outputLabel value="#{bundleMyBundle.EditKategorilerLabel_kategoriAdi}" for="kategoriAdi" />
+                        <p:inputText id="kategoriAdi" value="#{kategorilerController.selected.kategoriAdi}" title="#{bundleMyBundle.EditKategorilerTitle_kategoriAdi}" required="true" requiredMessage="#{bundleMyBundle.EditKategorilerRequiredMessage_kategoriAdi}" size="200" maxlength="200"/>
+
+                        <p:outputLabel value="#{bundleMyBundle.EditKategorilerLabel_kategoriTarih}" for="kategoriTarih" />
+                        <p:calendar id="kategoriTarih" pattern="MM/dd/yyyy HH:mm:ss" value="#{kategorilerController.selected.kategoriTarih}" title="#{bundleMyBundle.EditKategorilerTitle_kategoriTarih}" required="true" requiredMessage="#{bundleMyBundle.EditKategorilerRequiredMessage_kategoriTarih}" showOn="button"/>
+
+                        <p:outputLabel value="#{bundleMyBundle.EditKategorilerLabel_kategoriLink}" for="kategoriLink" />
+                        <p:inputText id="kategoriLink" value="#{kategorilerController.selected.kategoriLink}" title="#{bundleMyBundle.EditKategorilerTitle_kategoriLink}" required="true" requiredMessage="#{bundleMyBundle.EditKategorilerRequiredMessage_kategoriLink}" size="200" maxlength="200"/>
+
+                        <p:outputLabel value="#{bundleMyBundle.EditKategorilerLabel_kategoriDesc}" for="kategoriDesc" />
+                        <p:inputText id="kategoriDesc" value="#{kategorilerController.selected.kategoriDesc}" title="#{bundleMyBundle.EditKategorilerTitle_kategoriDesc}" required="true" requiredMessage="#{bundleMyBundle.EditKategorilerRequiredMessage_kategoriDesc}" size="250" maxlength="250"/>
+
+                        <p:outputLabel value="#{bundleMyBundle.EditKategorilerLabel_kategoriKeyw}" for="kategoriKeyw" />
+                        <p:inputText id="kategoriKeyw" value="#{kategorilerController.selected.kategoriKeyw}" title="#{bundleMyBundle.EditKategorilerTitle_kategoriKeyw}" required="true" requiredMessage="#{bundleMyBundle.EditKategorilerRequiredMessage_kategoriKeyw}" size="250" maxlength="250"/>
+
+                        <p:outputLabel value="#{bundleMyBundle.EditKategorilerLabel_kategoriAnasayfaKonu}" for="kategoriAnasayfaKonu" />
+                        <p:inputText id="kategoriAnasayfaKonu" value="#{kategorilerController.selected.kategoriAnasayfaKonu}" title="#{bundleMyBundle.EditKategorilerTitle_kategoriAnasayfaKonu}" required="true" requiredMessage="#{bundleMyBundle.EditKategorilerRequiredMessage_kategoriAnasayfaKonu}" size="100" maxlength="100"/>
+
+                        <p:outputLabel value="#{bundleMyBundle.EditKategorilerLabel_kategoriFullKonu}" for="kategoriFullKonu" />
+                        <p:inputText id="kategoriFullKonu" value="#{kategorilerController.selected.kategoriFullKonu}" title="#{bundleMyBundle.EditKategorilerTitle_kategoriFullKonu}" required="true" requiredMessage="#{bundleMyBundle.EditKategorilerRequiredMessage_kategoriFullKonu}" size="100" maxlength="100"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{kategorilerController.save}" value="#{bundleMyBundle.Save}" update="display,:KategorilerListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('KategorilerEditDialog'));">
+                        <p:confirm header="#{bundleMyBundle.ConfirmationHeader}" message="#{bundleMyBundle.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{bundleMyBundle.Cancel}" onclick="PF('KategorilerEditDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>

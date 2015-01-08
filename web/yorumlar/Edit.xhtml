@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="YorumlarEditDlg" widgetVar="YorumlarEditDialog" modal="true" resizable="false"  appendTo="@(body)" header="#{bundleMyBundle.EditYorumlarTitle}" closeOnEscape="true">
+
+            <h:form id="YorumlarEditForm">
+
+                <h:panelGroup id="display">
+                    <p:panelGrid  columns="2" columnClasses="column" rendered="#{yorumlarController.selected != null}">
+
+
+                        <h:outputLabel value="#{bundleMyBundle.EditYorumlarLabel_yorumId}" for="yorumId" />
+                        <h:outputText id="yorumId" value="#{yorumlarController.selected.yorumId}" />
+
+                        <p:outputLabel value="#{bundleMyBundle.EditYorumlarLabel_uyeId}" for="uyeId" />
+                        <p:inputText id="uyeId" value="#{yorumlarController.selected.uyeId}" title="#{bundleMyBundle.EditYorumlarTitle_uyeId}" required="true" requiredMessage="#{bundleMyBundle.EditYorumlarRequiredMessage_uyeId}"/>
+
+                        <p:outputLabel value="#{bundleMyBundle.EditYorumlarLabel_konuId}" for="konuId" />
+                        <p:inputText id="konuId" value="#{yorumlarController.selected.konuId}" title="#{bundleMyBundle.EditYorumlarTitle_konuId}" required="true" requiredMessage="#{bundleMyBundle.EditYorumlarRequiredMessage_konuId}"/>
+
+                        <p:outputLabel value="#{bundleMyBundle.EditYorumlarLabel_begenenId}" for="begenenId" />
+                        <p:inputText id="begenenId" value="#{yorumlarController.selected.begenenId}" title="#{bundleMyBundle.EditYorumlarTitle_begenenId}" required="true" requiredMessage="#{bundleMyBundle.EditYorumlarRequiredMessage_begenenId}"/>
+
+                        <p:outputLabel value="#{bundleMyBundle.EditYorumlarLabel_yorumBaslik}" for="yorumBaslik" />
+                        <p:inputText id="yorumBaslik" value="#{yorumlarController.selected.yorumBaslik}" title="#{bundleMyBundle.EditYorumlarTitle_yorumBaslik}" required="true" requiredMessage="#{bundleMyBundle.EditYorumlarRequiredMessage_yorumBaslik}" size="50" maxlength="50"/>
+
+                        <p:outputLabel value="#{bundleMyBundle.EditYorumlarLabel_yorumIcerik}" for="yorumIcerik" />
+                        <p:inputTextarea rows="4" cols="30" id="yorumIcerik" value="#{yorumlarController.selected.yorumIcerik}" title="#{bundleMyBundle.EditYorumlarTitle_yorumIcerik}" required="true" requiredMessage="#{bundleMyBundle.EditYorumlarRequiredMessage_yorumIcerik}"/>
+
+                        <p:outputLabel value="#{bundleMyBundle.EditYorumlarLabel_yorumTarihi}" for="yorumTarihi" />
+                        <p:calendar id="yorumTarihi" pattern="MM/dd/yyyy HH:mm:ss" value="#{yorumlarController.selected.yorumTarihi}" title="#{bundleMyBundle.EditYorumlarTitle_yorumTarihi}" required="true" requiredMessage="#{bundleMyBundle.EditYorumlarRequiredMessage_yorumTarihi}" showOn="button"/>
+
+                        <p:outputLabel value="#{bundleMyBundle.EditYorumlarLabel_yorumsuzlukAvatarı}" for="yorumsuzlukAvatarı" />
+                        <p:inputText id="yorumsuzlukAvatarı" value="#{yorumlarController.selected.yorumsuzlukAvatarı}" title="#{bundleMyBundle.EditYorumlarTitle_yorumsuzlukAvatarı}" required="true" requiredMessage="#{bundleMyBundle.EditYorumlarRequiredMessage_yorumsuzlukAvatarı}" size="50" maxlength="50"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{yorumlarController.save}" value="#{bundleMyBundle.Save}" update="display,:YorumlarListForm:datalist,:growl" oncomplete="handleSubmit(xhr,status,args,PF('YorumlarEditDialog'));">
+                        <p:confirm header="#{bundleMyBundle.ConfirmationHeader}" message="#{bundleMyBundle.ConfirmEditMessage}" icon="ui-icon-alert"/>
+                    </p:commandButton>
+                    <p:commandButton value="#{bundleMyBundle.Cancel}" onclick="PF('YorumlarEditDialog').hide()"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+
+</html>
